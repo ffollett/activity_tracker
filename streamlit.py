@@ -65,15 +65,13 @@ if choice == 'Home':
     st.subheader("Home")
     result = view_all()
         
-    for i in result:
-        st.write(f"{i[1]}: {i[0]}")
+    st.dataframe(result)
     
 elif choice == 'Today':
     st.subheader("Today's Acitvity")
     result = view_today()
     
-    for i in result:
-        st.write(f"{i[1]}: {i[0]}")
+    st.dataframe(result)
 
 elif choice == 'Add Record':
     st.subheader("Add a new record")
