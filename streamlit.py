@@ -11,8 +11,8 @@ conn = sqlite3.connect('windows.db')
 c = conn.cursor()
 
 #Functions
-def view_all():
-	c.execute('SELECT * FROM windowtracking')
+def view_all(limit=100):
+	c.execute('SELECT * FROM windowtracking ORDER BY start DESC LIMIT ?', (limit,))
 	data = c.fetchall()
 	return data
 
@@ -63,7 +63,8 @@ if st.sidebar.button("Purge db"):
 # Main Content
 if choice == 'Home':
     st.subheader("Home")
-    result = view_all()
+    limit = st.number_input("Limit results", min_value=1, max_value=10000, value=100)
+    result = view_all(limit)
         
     for i in result:
         st.write(f"{i[1]}: {i[0]}")
